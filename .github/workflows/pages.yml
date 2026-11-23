@@ -23,15 +23,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Enable GitHub Pages (Actions source) if needed
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set +e
-          gh api -X POST "repos/${{ github.repository }}/pages" -f build_type=workflow
-          # Already enabled, or token cannot create the site: continue and let deploy report it.
-          true
-
       - name: Fetch images from the Netlify copy
         run: bash scripts/fetch-images.sh
 
@@ -48,7 +39,11 @@ jobs:
             cp index.html "publish/$route/index.html"
           done
 
+      # enablement: true asks this action to create the Pages site if missing.
+      # The default GITHUB_TOKEN could not POST /pages (403) on the first run.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:
