@@ -19,4 +19,4 @@ This repository contains no secrets, tokens, or credentials.
 
 - GitHub Pages 301s `/reviews` to `/reviews/` (and the same for the other routes). That is expected.
 - "Enforce HTTPS" on the custom domain may still need to be turned on in Settings → Pages.
-- The reviews list is loaded from Buildy's API, which currently allows the original Superdev origin only. If reviews are empty or fail, add `https://buildy.sitewizard.pro` to that allowlist in Buildy.
+- The 7 client reviews on `/reviews` are hard-coded (copied from the original Superdev reviews page). A source link points to https://cibpi6ekp7ti9wugyrptg.superdev.run/reviews. The live Buildy reviews API is not called, because this origin is not on its allowlist.
